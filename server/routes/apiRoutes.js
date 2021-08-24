@@ -53,6 +53,9 @@ router.put('/:id', (req, res) => {
         return product.id === parseInt(req.params.id)
     })
     if(currentProduct){
+        let index = products.findIndex((product) => {
+            return product.id === req.params.id
+        })
         let updatedProduct = {
             id: currentProduct.id,
             imgUrl: req.body.imgUrl ? req.body.imgUrl : currentProduct.imgUrl,
@@ -61,7 +64,7 @@ router.put('/:id', (req, res) => {
         }
         res.json({
             msg: `product with id ${req.params.id} is updated`,
-            products: products.splice(products.indexOf(currentProduct), 1, updatedProduct)
+            products: products.splice(index, 1, updatedProduct)
         })
     }
     else{
