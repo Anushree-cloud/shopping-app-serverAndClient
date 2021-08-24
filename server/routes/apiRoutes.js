@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
 //get a single product
 router.get('/:id', (req, res) => {
     const currentProduct = products.find((product) => {
-        return product.id === parseInt(req.params.id)
+        return product.id === req.params.id
     })
     if(currentProduct){
         res.json(currentProduct)
@@ -33,13 +33,13 @@ router.post('/', (req, res) => {
 
 //delete a product
 router.delete('/:id', (req, res) => {
-    const currentProduct = products.some((product) => {
-        return product.id === parseInt(req.params.id)
+    const currentProduct = products.find((product) => {
+        return product.id === req.params.id
     })
     if(currentProduct){
         res.json({ 
             msg: `product with the id ${req.params.id} is deleted`,
-            products: products.filter((product) => product.id !== parseInt(req.params.id))
+            products: products.filter((product) => product.id !== req.params.id)
         })
     }
     else{
@@ -49,19 +49,23 @@ router.delete('/:id', (req, res) => {
 
 //update a product
 router.put('/:id', (req, res) => {
-    let currentProduct = products.some((product) => {
+    let currentProduct = products.find((product) => {
         return product.id === parseInt(req.params.id)
     })
     if(currentProduct){
-        const updatedProduct = req.body
-        products.forEach((product) => {
-            if(product.id === parseInt(req.params.id)){
-                product.name = updatedProduct.name ? updatedProduct.name : product.name
-                product.email = updatedProduct.email ? updatedProduct.email : product.email
-            }
-            res.json({ msg: 'product updated!', product})
+        let updatedProduct = {
+            id: currentProduct.id,
+            imgUrl: req.body.imgUrl ? req.body.imgUrl : currentProduct.imgUrl,
+            product_name: req.body.product_name ? req.body.product_name : currentProduct.product_name,
+            price: req.body.price ? req.body.price : currentProduct.price
+        }
+        res.json({
+            msg: `product with id ${req.params.id} is updated`,
+            products: products.splice(products.indexOf(currentProduct), 1, updatedProduct)
         })
-        
+    }
+    else{
+        res.status(400).json({ msg: "product not found"})
     }
 })
 
