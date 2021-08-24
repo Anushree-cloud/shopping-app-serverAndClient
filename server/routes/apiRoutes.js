@@ -1,7 +1,18 @@
-const products = require('../Products')
+const products = require('../Products.json')
 const express = require('express')
+const fs = require('fs')
 const uuid = require('uuid')
 const router = express.Router()
+
+
+// write file
+function writeDataToFile(data){
+    fs.writeFile('../Products', JSON.stringify(data), (error) => {
+        if(error){
+            console.log(error);
+        }
+    })
+}
 
 //get all products
 router.get('/', (req, res) => {
@@ -29,6 +40,7 @@ router.post('/', (req, res) => {
     }
     products.push(newProduct)
     res.json(products)
+    writeDataToFile(products)
 })
 
 //delete a product
@@ -41,6 +53,7 @@ router.delete('/:id', (req, res) => {
             msg: `product with the id ${req.params.id} is deleted`,
             products: products.filter((product) => product.id !== req.params.id)
         })
+        writeDataToFile(products)
     }
     else{
         res.status(400).json({ msg: "product not found!" })
@@ -50,7 +63,7 @@ router.delete('/:id', (req, res) => {
 //update a product
 router.put('/:id', (req, res) => {
     let currentProduct = products.find((product) => {
-        return product.id === parseInt(req.params.id)
+        return product.id === req.params.id
     })
     if(currentProduct){
         let index = products.findIndex((product) => {
@@ -66,6 +79,7 @@ router.put('/:id', (req, res) => {
             msg: `product with id ${req.params.id} is updated`,
             products: products.splice(index, 1, updatedProduct)
         })
+        writeDataToFile(products)
     }
     else{
         res.status(400).json({ msg: "product not found"})
