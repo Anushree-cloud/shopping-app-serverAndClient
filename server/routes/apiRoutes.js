@@ -7,7 +7,7 @@ const router = express.Router()
 
 // write file
 function writeDataToFile(data){
-    fs.writeFile('./Products.json', JSON.stringify(data), (error) => {
+    fs.writeFileSync('./Products.json', JSON.stringify(data), (error) => {
         if(error){
             console.log(error);
         }
@@ -53,11 +53,11 @@ router.delete('/:id', (req, res) => {
             return product.id === req.params.id
         })
         products.splice(index, 1)
+        writeDataToFile(products)
         res.json({ 
             msg: `product with the id ${req.params.id} is deleted`,
             products
         })
-        writeDataToFile(products)
     }
     else{
         res.status(400).json({ msg: "product not found!" })
@@ -80,11 +80,11 @@ router.put('/:id', (req, res) => {
             price: req.body.price ? req.body.price : currentProduct.price
         }
         products[index] = updatedProduct
+        writeDataToFile(products)
         res.json({
             msg: `product with id ${req.params.id} is updated`,
             products
         })
-        writeDataToFile(products)
     }
     else{
         res.status(400).json({ msg: "product not found"})
