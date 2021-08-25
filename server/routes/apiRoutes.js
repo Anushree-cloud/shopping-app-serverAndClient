@@ -6,11 +6,12 @@ const router = express.Router()
 
 
 // write file
-function writeDataToFile(data){
-    fs.writeFileSync('./Products.json', JSON.stringify(data), (error) => {
+function writeDataToFile(data, callBack){
+    fs.writeFile('./Products.json', JSON.stringify(data), (error) => {
         if(error){
             console.log(error);
         }
+        callBack()
     })
 }
 
@@ -80,11 +81,13 @@ router.put('/:id', (req, res) => {
             price: req.body.price ? req.body.price : currentProduct.price
         }
         products[index] = updatedProduct
-        writeDataToFile(products)
-        res.json({
-            msg: `product with id ${req.params.id} is updated`,
-            products
+        writeDataToFile(products, () => {
+            res.json({
+                msg: `product with id ${req.params.id} is updated`,
+                products
+            })
         })
+        
     }
     else{
         res.status(400).json({ msg: "product not found"})
