@@ -1,6 +1,6 @@
 const products = require('../database/Products.json')
 const uuid = require('uuid')
-const { writeDataToFile, getDataFromFile, findProductById } = require('../model/products')
+const { writeDataToFile, getDataFromFile, findProductById } = require('../model/product')
 
 // get all product
 const getAllProducts = (req, res) => {
