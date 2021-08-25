@@ -1,35 +1,21 @@
-const products = require("../Products.json")
-const express = require('express')
-const fs = require('fs')
+const products = require('../database/Products.json')
 const uuid = require('uuid')
-const router = express.Router()
+const { writeDataToFile, getDataFromFile, findProductById } = require('../model/products')
 
-
-// write file
-function writeDataToFile(data, callBack){
-    fs.writeFile('./Products.json', JSON.stringify(data), (error) => {
-        if(error){
-            console.log(error);
-        }
-        callBack()
+// get all product
+const getAllProducts = (req, res) => {
+    getDataFromFile((data) => {
+        res.json({
+            message: `all products fetched successfully`,
+            data: data
+        })
     })
 }
 
-//get all products
-router.get('/', (req, res) => {
-    writeDataToFile(products, () => {
-        res.json({
-            message: `all products fetched successfully`,
-            data: products
-        })
-    })
-})
 
 //get a single product
-router.get('/:id', (req, res) => {
-    const currentProduct = products.find((product) => {
-        return product.id === req.params.id
-    })
+const getSingleProduct = (req, res) => {
+    const currentProduct = findProductById(req.params.id)
     if(currentProduct){
         writeDataToFile(products, () => {
             res.json({
@@ -41,10 +27,11 @@ router.get('/:id', (req, res) => {
     else{
         res.status(400).json({ message: "product not found!" })
     }
-})
+}
 
-//create a product
-router.post('/', (req, res) => {
+
+//create a new product
+const createProduct = (req, res) => {
     const newProduct = {
         id: uuid.v4(),
         ...req.body,
@@ -56,13 +43,12 @@ router.post('/', (req, res) => {
             data: newProduct
         })
     })
-})
+}
 
-//delete a product
-router.delete('/:id', (req, res) => {
-    const currentProduct = products.find((product) => {
-        return product.id === req.params.id
-    })
+
+// delete a product
+const deleteProduct = (req, res) => {
+    const currentProduct = findProductById(req.params.id)
     if(currentProduct){
         let index = products.findIndex((product) => {
             return product.id === req.params.id
@@ -78,13 +64,12 @@ router.delete('/:id', (req, res) => {
     else{
         res.status(400).json({ msg: "product not found!" })
     }
-})
+}
+
 
 //update a product
-router.put('/:id', (req, res) => {
-    let currentProduct = products.find((product) => {
-        return product.id === req.params.id
-    })
+const updateProduct = (req, res) => {
+    const currentProduct = findProductById(req.params.id)
     if(currentProduct){
         let index = products.findIndex((product) => {
             return product.id === req.params.id
@@ -107,7 +92,7 @@ router.put('/:id', (req, res) => {
     else{
         res.status(400).json({ msg: "product not found"})
     }
-})
+}
 
 
-module.exports = router;
+module.exports = { getAllProducts, getSingleProduct, createProduct, deleteProduct, updateProduct }
