@@ -17,7 +17,12 @@ function writeDataToFile(data, callBack){
 
 //get all products
 router.get('/', (req, res) => {
-    res.json(products)
+    writeDataToFile(products, () => {
+        res.json({
+            message: `all products fetched successfully`,
+            data: products
+        })
+    })
 })
 
 //get a single product
@@ -26,10 +31,15 @@ router.get('/:id', (req, res) => {
         return product.id === req.params.id
     })
     if(currentProduct){
-        res.json(currentProduct)
+        writeDataToFile(products, () => {
+            res.json({
+                message: `product with id ${req.params.id} is found`,
+                data: currentProduct
+            })
+        })
     }
     else{
-        res.status(400).json({ msg: "product not found!" })
+        res.status(400).json({ message: "product not found!" })
     }
 })
 
@@ -40,8 +50,12 @@ router.post('/', (req, res) => {
         ...req.body,
     }
     products.push(newProduct)
-    writeDataToFile(products)
-    res.json(products)
+    writeDataToFile(products, () => {
+        res.json({
+            message: `product added successfully`,
+            data: newProduct
+        })
+    })
 })
 
 //delete a product
@@ -54,10 +68,11 @@ router.delete('/:id', (req, res) => {
             return product.id === req.params.id
         })
         products.splice(index, 1)
-        writeDataToFile(products)
-        res.json({ 
-            msg: `product with the id ${req.params.id} is deleted`,
-            products
+        writeDataToFile(products, () => {
+            res.json({
+                message: `product with id ${req.params.id} is deleted`,
+                data: {}
+            })
         })
     }
     else{
@@ -83,8 +98,8 @@ router.put('/:id', (req, res) => {
         products[index] = updatedProduct
         writeDataToFile(products, () => {
             res.json({
-                msg: `product with id ${req.params.id} is updated`,
-                products
+                message: `product with id ${req.params.id} is updated`,
+                data: updatedProduct
             })
         })
         
