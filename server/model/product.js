@@ -1,4 +1,5 @@
-const fs = require('fs')
+const fs = require('fs');
+const path = require('path');
 const products = require('../database/Products.json')
 
 // write file
@@ -12,7 +13,7 @@ function writeDataToFile(data, callBack){
 
 //read file
 function getDataFromFile(callBack) {
-    fs.readFile('/Products.json', 'utf8', (error, data) => {
+    fs.readFile(path.join(__dirname, '../database/Products.json'), 'utf8', (error, data) => {
         if(error)
             console.log(error);
         let parseData = JSON.parse(data)
