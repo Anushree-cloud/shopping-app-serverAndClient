@@ -1,7 +1,11 @@
 const express = require('express')
+const cors = require('cors')
 const router = require('./routes/api/products')
 
 const app = express()
+
+//init cross origin resourse sharing(cors) middleware
+app.use(cors())
 
 
 // init Body Parser middleware
