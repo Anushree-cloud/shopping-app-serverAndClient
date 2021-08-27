@@ -28,35 +28,34 @@ export default function ProductListAdmin() {
             ) : (
                 <div>
                     <h1>Product List</h1>
-                    { productList.map((product) => {
-                        return (
-                            <>
-                                <Table striped bordered hover>
-                                    <thead>
-                                        <tr>
-                                            <th>Id</th>
-                                            <th>Name</th>
-                                            <th>Image URL</th>
-                                            <th>Price</th>
-                                            <th>Actions</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>{product.id}</td>
-                                            <td>{product.product_name}</td>
-                                            <td>{product.imgUrl}</td>
-                                            <td>${product.price}</td>
-                                            <td>
-                                                <Button onClick={() => goToPage('/products/edit/id')}>Edit</Button>
-                                                <Button>Delete</Button>
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </Table>
-                            </>
-                        )
-                    })}
+                    <Table striped bordered hover>
+                        <thead>
+                            <tr>
+                                <th>Id</th>
+                                <th>Name</th>
+                                <th>Image URL</th>
+                                <th>Price</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        {/* { productList.map((product) => {
+                            return (
+                                <tbody>
+                                    <tr>
+                                        <td>{product.id}</td>
+                                        <td>{product.product_name}</td>
+                                        <td>{product.imgUrl}</td>
+                                        <td>${product.price}</td>
+                                        <td>
+                                            <Button onClick={() => goToPage('/products/edit/id')}>Edit</Button>
+                                            <Button>Delete</Button>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            )
+                        })} */}
+                        
+                    </Table>
                 </div>
             )}
             
