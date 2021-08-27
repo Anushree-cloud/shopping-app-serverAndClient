@@ -1,0 +1,19 @@
+.navbar {
+    background-color: #444444;
+}
+
+.search-bar:focus {
+    background-color: #fff;
+    color: #444;
+}
+
+.sign-out {
+    text-align: center;
+    background-color: black;
+    color: #aaa;
+    cursor: pointer;
+}
+
+.sign-out:hover {
+    color: #fff;
+}

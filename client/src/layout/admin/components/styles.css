@@ -2,41 +2,15 @@
     text-align: left;
 }
 
-.sidebar-header {
-    width: 15%;
-}
-
-.navbar {
-    background-color: #444444;
-    width: 75%;
-    padding: 0;
-}
-
 .search-bar {
-    height: 9vh;
+    height: 8vh;
     background-color: #444444;
     border: none
 }
 
-.search-bar:focus {
-    background-color: #fff;
-    color: #444;
-}
 
-.sign-out {
-    text-align: center;
-    background-color: black;
-    color: #aaa;
-    width: 10%;
-    cursor: pointer;
-}
-
-.sign-out:hover {
-    color: #fff;
-}
 .sidebar-itemList {
     height: 100vh;
-    width: 15%;
     border-right: 2px solid #ccc ;
     background-color: #efefef;
     font-weight: 600;
@@ -52,4 +26,5 @@
 
 .sidebar-item-link {
     margin-left: 10px;
+    text-decoration: none;
 }
