@@ -3,10 +3,10 @@ const { writeDataToFile, getDataFromFile, findProductById, findProductIndex } = 
 
 // get all product
 const getAllProducts = (req, res) => {
-    getDataFromFile((product) => {
+    getDataFromFile((products) => {
         res.json({
             message: `all products fetched successfully`,
-            data: product
+            data: products
         })
     })
 }
@@ -33,9 +33,9 @@ const createProduct = (req, res) => {
         id: uuid.v4(),
         ...req.body,
     }
-    getDataFromFile((product) => {
-        product.push(newProduct)
-        writeDataToFile(product, () => {
+    getDataFromFile((products) => {
+        products.push(newProduct)
+        writeDataToFile(products, () => {
             res.json({
                 message: `product added successfully`,
                 data: newProduct
@@ -51,9 +51,9 @@ const deleteProduct = (req, res) => {
     const currentProduct = findProductById(req.params.id)
     if(currentProduct){
         let index = findProductIndex(req.params.id)
-        getDataFromFile((product) => {
-            product.splice(index, 1)
-            writeDataToFile(product, () => {
+        getDataFromFile((products) => {
+            products.splice(index, 1)
+            writeDataToFile(products, () => {
                 res.json({
                     message: `product with id ${req.params.id} is deleted`,
                     data: {}
@@ -79,9 +79,9 @@ const updateProduct = (req, res) => {
             product_name: req.body.product_name ? req.body.product_name : currentProduct.product_name,
             price: req.body.price ? req.body.price : currentProduct.price
         }
-        getDataFromFile((product) => {
-            product[index] = updatedProduct
-            writeDataToFile(product, () => {
+        getDataFromFile((products) => {
+            products[index] = updatedProduct
+            writeDataToFile(products, () => {
                 res.json({
                     message: `product with id ${req.params.id} is updated`,
                     data: updatedProduct
