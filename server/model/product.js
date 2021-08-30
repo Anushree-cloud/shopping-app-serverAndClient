@@ -1,10 +1,10 @@
 const fs = require('fs');
 const path = require('path');
-const products = require('../database/Products.json')
+const products = require('../database/products.json')
 
 // write file
 function writeDataToFile(data, callBack){
-    fs.writeFile('./database/Products.json', JSON.stringify(data), (error) => {
+    fs.writeFile('./database/products.json', JSON.stringify(data), (error) => {
         if(error)
             console.log(error);
         callBack()
@@ -13,7 +13,7 @@ function writeDataToFile(data, callBack){
 
 //read file
 function getDataFromFile(callBack) {
-    fs.readFile(path.join(__dirname, '../database/Products.json'), 'utf8', (error, data) => {
+    fs.readFile(path.join(__dirname, '../database/products.json'), 'utf8', (error, data) => {
         if(error)
             console.log(error);
         let parseData = JSON.parse(data)
@@ -29,4 +29,11 @@ function findProductById(id) {
     return currentProduct
 }
 
-module.exports = { writeDataToFile, getDataFromFile, findProductById }
+function findProductIndex(id) {
+    let index = products.findIndex((product) => {
+        return product.id === id
+    })
+    return index
+}
+
+module.exports = { writeDataToFile, getDataFromFile, findProductById, findProductIndex }

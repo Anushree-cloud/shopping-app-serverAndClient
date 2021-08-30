@@ -32,11 +32,11 @@ export default function EditProduct() {
 
         axios.put(`http://localhost:5000/api/products/${id}`, updateProduct).then(response => {
             console.log(response)
+            history.push('/admin/products')
         }).catch((error) => {
             console.log(error)
         })
 
-        history.push('/admin/products')
     }
     
     

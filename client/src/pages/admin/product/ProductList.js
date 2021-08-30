@@ -10,6 +10,7 @@ export default function ProductListAdmin() {
     const [productList, setProductList] = useState([])
     const [loading, setLoading] = useState(true)
     const history = useHistory()
+
     useEffect(() => {
         setLoading(true)
         axios.get('http://localhost:5000/api/products').then(response =>{
@@ -50,10 +51,10 @@ export default function ProductListAdmin() {
                         <tbody>
                             { productList.map((product) => {
                                 return (
-                                    <tr >
+                                    <tr key={product.id}>
                                         <td >{product.id}</td>
                                         <td>{product.product_name}</td>
-                                        <td><img src={product.imgUrl} style={{width:'15%'}} /></td>
+                                        <td style={{width: 'min-content'}}><img src={product.imgUrl} style={{width:'15%'}} /></td>
                                         <td>${product.price}</td>
                                         <td>
                                             <Button 

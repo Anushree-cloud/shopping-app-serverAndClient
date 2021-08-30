@@ -12,13 +12,14 @@ export default function AddProduct() {
 
     function addProduct() {
         let newProduct = {
-            imhUrl: image,
+            imgUrl: image,
             product_name: productName,
             price: price
         }
         axios.post('http://localhost:5000/api/products', newProduct).then( response => {
             console.log(response.data.data);
             toast('Product Added!')
+            history.push('/admin/products')
         }).catch( error => {
             console.log(error);
         })
@@ -26,8 +27,6 @@ export default function AddProduct() {
 
     function submitHandler() {
         addProduct()
-        history.push('/admin/products')
-        
     }
 
     return (

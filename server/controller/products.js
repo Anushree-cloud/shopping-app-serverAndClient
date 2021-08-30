@@ -1,13 +1,12 @@
-const products = require('../database/Products.json')
 const uuid = require('uuid')
-const { writeDataToFile, getDataFromFile, findProductById } = require('../model/product')
+const { writeDataToFile, getDataFromFile, findProductById, findProductIndex } = require('../model/product')
 
 // get all product
 const getAllProducts = (req, res) => {
-    getDataFromFile((data) => {
+    getDataFromFile((product) => {
         res.json({
             message: `all products fetched successfully`,
-            data: data
+            data: product
         })
     })
 }
@@ -17,11 +16,9 @@ const getAllProducts = (req, res) => {
 const getSingleProduct = (req, res) => {
     const currentProduct = findProductById(req.params.id)
     if(currentProduct){
-        writeDataToFile(products, () => {
-            res.json({
-                message: `product with id ${req.params.id} is found`,
-                data: currentProduct
-            })
+        res.json({
+            message: `products with id ${req.params.id} fetched successfully`,
+            data: currentProduct
         })
     }
     else{
@@ -36,13 +33,16 @@ const createProduct = (req, res) => {
         id: uuid.v4(),
         ...req.body,
     }
-    products.push(newProduct)
-    writeDataToFile(products, () => {
-        res.json({
-            message: `product added successfully`,
-            data: newProduct
+    getDataFromFile((product) => {
+        product.push(newProduct)
+        writeDataToFile(product, () => {
+            res.json({
+                message: `product added successfully`,
+                data: newProduct
+            })
         })
     })
+    
 }
 
 
@@ -50,16 +50,17 @@ const createProduct = (req, res) => {
 const deleteProduct = (req, res) => {
     const currentProduct = findProductById(req.params.id)
     if(currentProduct){
-        let index = products.findIndex((product) => {
-            return product.id === req.params.id
-        })
-        products.splice(index, 1)
-        writeDataToFile(products, () => {
-            res.json({
-                message: `product with id ${req.params.id} is deleted`,
-                data: {}
+        let index = findProductIndex(req.params.id)
+        getDataFromFile((product) => {
+            product.splice(index, 1)
+            writeDataToFile(product, () => {
+                res.json({
+                    message: `product with id ${req.params.id} is deleted`,
+                    data: {}
+                })
             })
         })
+        
     }
     else{
         res.status(400).json({ msg: "product not found!" })
@@ -71,22 +72,23 @@ const deleteProduct = (req, res) => {
 const updateProduct = (req, res) => {
     const currentProduct = findProductById(req.params.id)
     if(currentProduct){
-        let index = products.findIndex((product) => {
-            return product.id === req.params.id
-        })
+        let index = findProductIndex(req.params.id)
         let updatedProduct = {
             id: currentProduct.id,
             imgUrl: req.body.imgUrl ? req.body.imgUrl : currentProduct.imgUrl,
             product_name: req.body.product_name ? req.body.product_name : currentProduct.product_name,
             price: req.body.price ? req.body.price : currentProduct.price
         }
-        products[index] = updatedProduct
-        writeDataToFile(products, () => {
-            res.json({
-                message: `product with id ${req.params.id} is updated`,
-                data: updatedProduct
+        getDataFromFile((product) => {
+            product[index] = updatedProduct
+            writeDataToFile(product, () => {
+                res.json({
+                    message: `product with id ${req.params.id} is updated`,
+                    data: updatedProduct
+                })
             })
         })
+        
         
     }
     else{
