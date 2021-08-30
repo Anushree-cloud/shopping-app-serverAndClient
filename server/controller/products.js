@@ -29,9 +29,12 @@ const getSingleProduct = (req, res) => {
 
 //create a new product
 const createProduct = (req, res) => {
+    const { imgUrl, product_name, price } = req.body
     const newProduct = {
         id: uuid.v4(),
-        ...req.body,
+        imgUrl,
+        product_name,
+        price
     }
     getDataFromFile((products) => {
         products.push(newProduct)
