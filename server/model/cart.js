@@ -1,4 +1,5 @@
 const cartItems = require('../database/cartItems.json')
+const products = require('../database/products.json')
 const path = require('path')
 const fs = require('fs')
 
@@ -23,7 +24,7 @@ function getDataFromFile(callBack) {
 
 // find a product by id
 function findProductById(id) {
-    let currentProduct = cartItems.find((product) => {
+    let currentProduct = products.find((product) => {
         return product.id === id
     })
     return currentProduct
