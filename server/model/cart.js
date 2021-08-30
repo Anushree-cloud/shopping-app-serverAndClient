@@ -4,7 +4,7 @@ const path = require('path')
 const fs = require('fs')
 
 //write file
-function writeDataToFile(data, callback) {
+function writeDataToFile(data, callBack) {
     fs.writeFile('./database/cartItems.json', JSON.stringify(data), (error) => {
         if(error)
             console.log(error);

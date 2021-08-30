@@ -22,15 +22,16 @@ export default function EditProduct() {
         })
     }, [])
 
-    function updateProduct() {
-        let updateProduct = {
+    const updateProduct = (e) => {
+        e.preventDefault()
+        let updatedProduct = {
             id: id,
             imgUrl: image,
             product_name: productName,
             price: price
         }
 
-        axios.put(`http://localhost:5000/api/products/${id}`, updateProduct).then(response => {
+        axios.put(`http://localhost:5000/api/products/${id}`, updatedProduct).then(response => {
             console.log(response)
             history.push('/admin/products')
         }).catch((error) => {
