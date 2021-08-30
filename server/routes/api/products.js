@@ -5,19 +5,19 @@ const { getAllProducts, getSingleProduct, createProduct, deleteProduct, updatePr
 
 
 //get all products
-router.get('/', getAllProducts)
+router.get('/api/products/', getAllProducts)
 
 //get a single product
-router.get('/:id', getSingleProduct)
+router.get('/api/products/:id', getSingleProduct)
 
 //create a product
-router.post('/', createProduct)
+router.post('/api/products/', createProduct)
 
 //delete a product
-router.delete('/:id', deleteProduct)
+router.delete('/api/products/:id', deleteProduct)
 
 //update a product
-router.put('/:id', updateProduct)
+router.put('/api/products/:id', updateProduct)
 
 
 module.exports = router;

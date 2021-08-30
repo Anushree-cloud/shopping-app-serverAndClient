@@ -1,0 +1,15 @@
+.card-container {
+    display: flex;
+    align-items: center;
+    margin-left: 7vw !important;
+}
+
+
+.card-hover {
+    box-shadow: 0px 0px 15px black;
+}
+
+
+.card-hover:hover {
+    background-color: burlywood;
+}

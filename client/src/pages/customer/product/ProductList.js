@@ -1,31 +1,11 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
-
 import './css/styles.css'
-
-import { makeStyles } from '@material-ui/core/styles';
-import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
-import CardContent from '@material-ui/core/CardContent';
-import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
-import Typography from '@material-ui/core/Typography';
+import { Card, Button, Spinner } from 'react-bootstrap';
 import { useHistory } from 'react-router-dom';
-
-const useStyles = makeStyles({
-    root: {
-        maxWidth: 345,
-        margin: '10px',
-    },
-    media: {
-        height: 140,
-    },
-});
 
 
 export default function ProductList() {
-    const classes = useStyles();
     const [productList, setProductList] = useState([])
     const [loading, setLoading] = useState(true)
     const history = useHistory()
@@ -48,41 +28,31 @@ export default function ProductList() {
         <>
             {
                 loading ? ( 
-                    <h1>Loading....</h1>
+                    <Spinner animation="border" role="status" style={{marginTop: "35vh", width: '100px', height: '100px'}}>
+                        <span className="visually-hidden">Loading...</span>
+                    </Spinner>
                 ) : (
-                    productList.map( (product) => {
-                        return (
-                            <div className="card-container">
-                                <Card className={classes.root}>
-                                    <CardActionArea>
-                                        <CardMedia
-                                        className={classes.media}
-                                        image={product.imgUrl}
-                                        title="Contemplative Reptile"
-                                        />
-                                        <CardContent>
-                                            <Typography gutterBottom variant="h5" component="h2">
-                                                {product.product_name}
-                                            </Typography>
-                                            {/* <Typography variant="body2" color="textSecondary" component="p">
-                                                Lizards are a widespread group of squamate reptiles, with over 6,000 species, ranging
-                                                across all continents except Antarctica
-                                            </Typography> */}
-                                        </CardContent>
-                                    </CardActionArea>
-
-                                    <CardActions>
-                                        <Button size="small" color="primary" onClick={() => goToPage(`/product/details/${product.id}`)}>
-                                            Details
-                                        </Button>
-                                        <Button size="small" color="primary">
-                                            Add to Cart
-                                        </Button>
-                                    </CardActions>
-                                </Card>
-                            </div>
-                        )
-                    })
+                    <div className="card-container container row" >
+                        {
+                            productList.map( (product) => {
+                                return (
+                                    <div className="col col-lg-4">
+                                        <Card className="align-items-center m-4 card-hover" style={{width: "18rem", height: "24rem"}}>
+                                            <Card.Img style={{width: "200px", height: "200px"}} src={product.imgUrl} />
+                                            <Card.Body>
+                                                <Card.Title>{product.product_name}</Card.Title>
+                                                <Card.Text>
+                                                    $ {product.price}
+                                                </Card.Text>
+                                                <Button className="btn btn-warning m-2" onClick={() => goToPage(`/product/details/${product.id}`)}>View Details</Button>
+                                                <Button className="btn btn-primary m-2" >Add To Cart</Button>
+                                            </Card.Body>
+                                        </Card>
+                                    </div>
+                                )
+                            })
+                        }
+                    </div>
                 )
             }
         </>

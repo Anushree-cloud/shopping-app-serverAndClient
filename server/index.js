@@ -14,7 +14,7 @@ app.use(express.urlencoded({ extended: false }))
 
 
 // routes
-app.use('/api/products', router)
+app.use(router)
 
 const PORT = process.env.PORT || 5000
 
