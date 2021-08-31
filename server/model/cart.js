@@ -1,10 +1,9 @@
 const cartItems = require('../database/cartItems.json')
-const products = require('../database/products.json')
 const path = require('path')
 const fs = require('fs')
 
 //write file
-function writeDataToFile(data, callBack) {
+function save(data, callBack) {
     fs.writeFile('./database/cartItems.json', JSON.stringify(data), (error) => {
         if(error)
             console.log(error);
@@ -13,7 +12,7 @@ function writeDataToFile(data, callBack) {
 }
 
 //read file
-function getDataFromFile(callBack) {
+function findAll(callBack) {
     fs.readFile(path.join(__dirname, '../database/cartItems.json'), 'utf8', (error, data) => {
         if(error)
             console.log(error);
@@ -22,12 +21,5 @@ function getDataFromFile(callBack) {
     })
 }
 
-// find a product by id
-function findProductById(id) {
-    let currentProduct = products.find((product) => {
-        return product.id === id
-    })
-    return currentProduct
-}
 
-module.exports = { writeDataToFile, getDataFromFile, findProductById }
+module.exports = { save, findAll }

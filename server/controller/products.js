@@ -1,9 +1,9 @@
 const uuid = require('uuid')
-const { writeDataToFile, getDataFromFile, findProductById, findProductIndex } = require('../model/product')
+const Product = require('../model/product')
 
 // get all product
 const getAllProducts = (req, res) => {
-    getDataFromFile((products) => {
+    Product.findAll((products) => {
         res.json({
             message: `all products fetched successfully`,
             data: products
@@ -14,7 +14,7 @@ const getAllProducts = (req, res) => {
 
 //get a single product
 const getSingleProduct = (req, res) => {
-    const currentProduct = findProductById(req.params.id)
+    const currentProduct = Product.findById(req.params.id)
     if(currentProduct){
         res.json({
             message: `products with id ${req.params.id} fetched successfully`,
@@ -36,9 +36,9 @@ const createProduct = (req, res) => {
         product_name,
         price
     }
-    getDataFromFile((products) => {
+    Product.findAll((products) => {
         products.push(newProduct)
-        writeDataToFile(products, () => {
+        Product.save(products, () => {
             res.json({
                 message: `product added successfully`,
                 data: newProduct
@@ -51,15 +51,15 @@ const createProduct = (req, res) => {
 
 // delete a product
 const deleteProduct = (req, res) => {
-    const currentProduct = findProductById(req.params.id)
+    const currentProduct = Product.findById(req.params.id)
     if(currentProduct){
-        let index = findProductIndex(req.params.id)
+        let index = Product.findByIndex(req.params.id)
         getDataFromFile((products) => {
             products.splice(index, 1)
-            writeDataToFile(products, () => {
+            Product.save(products, () => {
                 res.json({
                     message: `product with id ${req.params.id} is deleted`,
-                    data: {}
+                    data: products
                 })
             })
         })
@@ -73,9 +73,9 @@ const deleteProduct = (req, res) => {
 
 //update a product
 const updateProduct = (req, res) => {
-    const currentProduct = findProductById(req.params.id)
+    const currentProduct = Product.findById(req.params.id)
     if(currentProduct){
-        let index = findProductIndex(req.params.id)
+        let index = Product.findByIndex(req.params.id)
         let updatedProduct = {
             id: currentProduct.id,
             imgUrl: req.body.imgUrl ? req.body.imgUrl : currentProduct.imgUrl,

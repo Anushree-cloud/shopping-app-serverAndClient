@@ -1,6 +1,7 @@
 const express = require('express')
 const cors = require('cors')
-const router = require('./routes/api/products')
+const productRouter = require('./routes/api/products')
+const cartRouter = require('./routes/api/cartItems')
 
 const app = express()
 
@@ -14,7 +15,8 @@ app.use(express.urlencoded({ extended: false }))
 
 
 // routes
-app.use(router)
+app.use(productRouter)
+app.use(cartRouter)
 
 const PORT = process.env.PORT || 5000
 

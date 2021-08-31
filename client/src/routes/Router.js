@@ -6,6 +6,7 @@ import Layout from '../layout/customer/Layout'
 import Home from '../pages/customer/home/Home'
 import ProductList from '../pages/customer/product/ProductList'
 import ProductDetails from '../pages/customer/product/ProductDetails'
+import Cart from '../pages/customer/cart/Cart'
 
 /* admin */
 import AdminLayout from '../layout/admin/AdminLayout'
@@ -13,6 +14,7 @@ import Dashboard from '../pages/admin/dashboard/Dashboard'
 import ProductListAdmin from '../pages/admin/product/ProductList'
 import AddProduct from '../pages/admin/product/AddProduct'
 import EditProduct from '../pages/admin/product/EditProduct'
+
 
 export default function Router() {
     return (
@@ -32,6 +34,11 @@ export default function Router() {
                 <Route exact path='/product/details/:id'>
                     <Layout>
                         <ProductDetails />
+                    </Layout>
+                </Route>
+                <Route exact path='/cart'>
+                    <Layout>
+                        <Cart />
                     </Layout>
                 </Route>
 

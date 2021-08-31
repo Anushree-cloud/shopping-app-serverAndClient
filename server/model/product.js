@@ -3,7 +3,7 @@ const path = require('path');
 const products = require('../database/products.json')
 
 // write file
-function writeDataToFile(data, callBack){
+function save(data, callBack){
     fs.writeFile('./database/products.json', JSON.stringify(data), (error) => {
         if(error)
             console.log(error);
@@ -12,7 +12,7 @@ function writeDataToFile(data, callBack){
 }
 
 //read file
-function getDataFromFile(callBack) {
+function findAll(callBack) {
     fs.readFile(path.join(__dirname, '../database/products.json'), 'utf8', (error, data) => {
         if(error)
             console.log(error);
@@ -22,18 +22,18 @@ function getDataFromFile(callBack) {
 }
 
 // find a product by id
-function findProductById(id) {
+function findById(id) {
     let currentProduct = products.find((product) => {
         return product.id === id
     })
     return currentProduct
 }
 
-function findProductIndex(id) {
+function findByIndex(id) {
     let index = products.findIndex((product) => {
         return product.id === id
     })
     return index
 }
 
-module.exports = { writeDataToFile, getDataFromFile, findProductById, findProductIndex }
+module.exports = { save, findAll, findById, findByIndex }

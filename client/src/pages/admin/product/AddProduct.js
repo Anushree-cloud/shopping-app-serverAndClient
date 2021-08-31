@@ -25,7 +25,8 @@ export default function AddProduct() {
         })
     }
 
-    function submitHandler() {
+    const submitHandler = (e) => {
+        e.preventDefault()
         addProduct()
     }
 

@@ -7,17 +7,33 @@ import { useHistory } from 'react-router-dom';
 
 export default function ProductList() {
     const [productList, setProductList] = useState([])
+    const [cart, setCart] = useState([])
     const [loading, setLoading] = useState(true)
     const history = useHistory()
+
     useEffect(() => {
         setLoading(true)
+
         axios.get('http://localhost:5000/api/products').then(response =>{
             setProductList(response.data.data)
             setLoading(false)
         }).catch(error => {
             console.log(error);
         })
+
+        axios.get('http://localhost:5000/api/cart').then(response => {
+            setCart(response.data.data)
+        }).catch(error => console.log(error))
+
     }, [])
+
+
+    function addToCart(id) {
+        let newCartItem = cart.find((cartItem) => cartItem.id === id)
+        axios.post('http://localhost:5000/api/cart', newCartItem).then((response) => {
+            console.log(response.data.data)
+        }).catch(error => console.log(error))
+    }
     
     function goToPage(url) { 
         history.push(url)
@@ -45,7 +61,7 @@ export default function ProductList() {
                                                     $ {product.price}
                                                 </Card.Text>
                                                 <Button className="btn btn-warning m-2" onClick={() => goToPage(`/product/details/${product.id}`)}>View Details</Button>
-                                                <Button className="btn btn-primary m-2" >Add To Cart</Button>
+                                                <Button className="btn btn-primary m-2" onClick={() => addToCart(product.id)} >Add To Cart</Button>
                                             </Card.Body>
                                         </Card>
                                     </div>

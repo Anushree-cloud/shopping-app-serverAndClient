@@ -1,8 +1,8 @@
-const { writeDataToFile, getDataFromFile, findProductById } = require('../model/cart')
-
+const Cart = require('../model/cart')
+const Product = require('../model/product')
 //get cartItems
 const getCartItems = (req, res) => {
-    getDataFromFile((cartItems) => {
+    Cart.findAll((cartItems) => {
         res.json({
             message:'Cart-items fetched successfully.',
             data: cartItems
@@ -12,10 +12,10 @@ const getCartItems = (req, res) => {
 
 //post data to cart
 const postItemToCart = (req, res) => {
-    let currentProduct = findProductById(req.params.id)
-    getDataFromFile((cartItems) => {
+    let currentProduct = Product.findById(req.params.id)
+    Cart.findAll((cartItems) => {
         cartItems.push(currentProduct)
-        writeDataToFile( cartItems, () => {
+        Cart.save( cartItems, () => {
             res.json({
                 message: 'Item successfully added to cart.',
                 data: cartItems
