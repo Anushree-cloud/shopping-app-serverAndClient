@@ -9,7 +9,7 @@ function save(data, callBack) {
             console.log(error);
         callBack()
     })
-}
+} 
 
 //read file
 function findAll(callBack) {
@@ -21,5 +21,19 @@ function findAll(callBack) {
     })
 }
 
+// find a product by id
+function findById(id) {
+    let currentProduct = cartItems.find((cartItem) => {
+        return cartItem.id === id
+    })
+    return currentProduct
+}
 
-module.exports = { save, findAll }
+function findByIndex(id) {
+    let index = cartItems.findIndex((cartItem) => {
+        return cartItem.id === id
+    })
+    return index
+}
+
+module.exports = { save, findAll, findById, findByIndex }

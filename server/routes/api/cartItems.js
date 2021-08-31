@@ -6,4 +6,6 @@ cartRouter.get('/api/cart', Cart.getCartItems)
 
 cartRouter.post('/api/cart', Cart.postItemToCart)
 
-module.exports = cartRouter;
+cartRouter.put('/api/cart/:id', Cart.postItemToCart)
+
+module.exports = cartRouter; 

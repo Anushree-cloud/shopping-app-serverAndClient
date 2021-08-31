@@ -54,7 +54,7 @@ const deleteProduct = (req, res) => {
     const currentProduct = Product.findById(req.params.id)
     if(currentProduct){
         let index = Product.findByIndex(req.params.id)
-        getDataFromFile((products) => {
+        Product.findAll((products) => {
             products.splice(index, 1)
             Product.save(products, () => {
                 res.json({
@@ -82,9 +82,9 @@ const updateProduct = (req, res) => {
             product_name: req.body.product_name ? req.body.product_name : currentProduct.product_name,
             price: req.body.price ? req.body.price : currentProduct.price
         }
-        getDataFromFile((products) => {
+        Product.findAll((products) => {
             products[index] = updatedProduct
-            writeDataToFile(products, () => {
+            Product.save(products, () => {
                 res.json({
                     message: `product with id ${req.params.id} is updated`,
                     data: updatedProduct
