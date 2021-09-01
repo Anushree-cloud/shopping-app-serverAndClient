@@ -13,38 +13,61 @@ const getCartItems = (req, res) => {
 
 //post data to cart
 const postItemToCart = (req, res) => {
-    let currentProduct = Product.findById(req.body.productId)
-    Cart.findAll((cartItems) => {
-        cartItems.push(currentProduct)
-        Cart.save( cartItems, () => {
-            res.json({
-                message: 'Item successfully added to cart.',
-                data: cartItems
-            })
-        })
-    })
-}
+    let currentProduct = Product.findById()
+    let currentProductInCart = Cart.findById(req.body.productId)
 
-//update cart
-const updateCart = (req, res) => {
-    let currentProduct = Cart.findById(req.body.productId)
-    if(currentProduct){
-        let currentProductIndex = Cart.findByIndex(req.body.productId)
-        let updatedCartItem = {
-            ...currentProduct,
-            quantity: req.body.productQty
-        }
+    if(currentProductInCart){
+        let currentProductInCartIndex = Cart.findByIndex(req.body.productId)
         Cart.findAll((cartItems) => {
-            cartItems[currentProductIndex] = updatedCartItem
-            Cart.save(products, () => {
+            cartItems[currentProductInCartIndex] = {
+                product_name: currentProduct.product_name,
+                imgUrl: currentProduct.imgUrl,
+                price: currentProduct.price,
+                quantity: (currentProduct.quantity)++
+            }
+            Cart.save(cartItems, () => {
                 res.json({
                     message: `product with id ${req.body.productId} is updated`,
-                    data: updatedCartItem
+                    data: cartItems[currentProductInCartIndex]
                 })
             })
         })
     }
-    
+    else {
+        Cart.findAll((cartItems) => {
+            cartItems.push({...currentProduct, quantity: 1})
+            Cart.save(cartItems, () => {
+                res.json({
+                    message: 'Item successfully added to cart.',
+                    data: cartItems
+                })
+            })
+        })
+    }
 }
 
-module.exports = { getCartItems, postItemToCart, updateCart }
+// //update cart
+// const updateCart = (req, res) => {
+//     let currentProduct = Cart.findById(req.body.productId)
+//     if(currentProduct){
+//         let currentProductIndex = Cart.findByIndex(req.body.productId)
+//         let updatedCartItem = {
+//             product_name: currentProduct.product_name,
+//             imgUrl: currentProduct.imgUrl,
+//             price: currentProduct.price,
+//             quantity: (currentProduct.quantity)++
+//         }
+//         Cart.findAll((cartItems) => {
+//             cartItems[currentProductIndex] = updatedCartItem
+//             Cart.save(products, () => {
+//                 res.json({
+//                     message: `product with id ${req.body.productId} is updated`,
+//                     data: updatedCartItem
+//                 })
+//             })
+//         })
+//     }
+    
+// }
+
+module.exports = { getCartItems, postItemToCart }

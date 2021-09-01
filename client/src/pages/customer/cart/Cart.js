@@ -12,10 +12,9 @@ export default function Cart() {
     }, [])
 
     function countGrandTotal() {
-        let grandTotal = 0
-        cart.forEach((cartItem) => {
-            grandTotal += cartItem.quantity * cartItem.price
-        })
+        let grandTotal = cart.reduce((acc, item) => {
+            return acc += ( item.price * item.quantity )
+        }, 0)
         return grandTotal
     }
 
@@ -29,8 +28,6 @@ export default function Cart() {
                     <>
                         <div>
                             { cart.map((cartItem) =>{
-                                let grandTotal = 0
-                                grandTotal += cartItem.quantity * cartItem.price
                                 return (
                                     <div className='container my-2'>
                                         <Card style={{textAlign: "left", flexDirection: "row"}}>
