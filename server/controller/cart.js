@@ -13,7 +13,8 @@ const getCartItems = (req, res) => {
 
 //post data to cart
 const postItemToCart = (req, res) => {
-    let currentProduct = Product.findById()
+    let currentProduct = Product.findById(req.body.productId)
+    console.log(currentProduct);
     let currentProductInCart = Cart.findById(req.body.productId)
 
     if(currentProductInCart){
@@ -23,7 +24,7 @@ const postItemToCart = (req, res) => {
                 product_name: currentProduct.product_name,
                 imgUrl: currentProduct.imgUrl,
                 price: currentProduct.price,
-                quantity: (currentProduct.quantity)++
+                quantity: Number(currentProduct.quantity) + 1
             }
             Cart.save(cartItems, () => {
                 res.json({

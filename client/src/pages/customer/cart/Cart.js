@@ -28,8 +28,9 @@ export default function Cart() {
                     <>
                         <div>
                             { cart.map((cartItem) =>{
+                                console.log(cartItem);
                                 return (
-                                    <div className='container my-2'>
+                                    <div className='container my-2' key={cartItem.id}>
                                         <Card style={{textAlign: "left", flexDirection: "row"}}>
                                             <Card.Body>
                                                 <Card.Title>{cartItem.product_name}</Card.Title>
