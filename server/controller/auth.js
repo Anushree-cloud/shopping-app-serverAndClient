@@ -1,5 +1,4 @@
 const User = require('../model/user')
-const Auth = require('../model/auth')
 
 const login = (req, res) => {
     User.findAll((users) => {
@@ -9,16 +8,13 @@ const login = (req, res) => {
         })
         console.log(findUser)
         if(findUser) {
-            Auth.save(findUser, () => {
-                res.json({
-                    message: `Welcome Back ${findUser.name}`,
-                    data: {
-                        user: findUser,
-                        authCheck: true
-                    }
-                })
+            res.json({
+                message: `Welcome Back ${findUser.name}`,
+                data: {
+                    user: findUser,
+                    authCheck: true
+                }
             })
-            
         }
         else {
             res.json({
@@ -32,7 +28,10 @@ const login = (req, res) => {
 
 const logout = (req, res) => {
     res.json({
-        message: 'You Logged out!'
+        message: 'You Logged out!',
+        data: {
+            authCheck: false
+        }
     })
 }
 

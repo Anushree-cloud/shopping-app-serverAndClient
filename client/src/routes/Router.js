@@ -3,6 +3,7 @@ import { BrowserRouter, Route } from 'react-router-dom'
 
 /* customer */ 
 import Layout from '../layout/customer/Layout'
+import AuthLayout from '../layout/customer/AuthLayout'
 import Home from '../pages/customer/home/Home'
 import ProductList from '../pages/customer/product/ProductList'
 import ProductDetails from '../pages/customer/product/ProductDetails'
@@ -50,9 +51,9 @@ export default function Router() {
                     </Layout>
                 </Route>
                 <Route exact path='/login'>
-                    <Layout>
+                    <AuthLayout>
                         <Login />
-                    </Layout>
+                    </AuthLayout>
                 </Route>
 
                 {/* admin routes */}

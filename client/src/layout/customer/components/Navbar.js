@@ -1,5 +1,5 @@
 import React, { useContext } from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useHistory } from 'react-router-dom'
 import { Navbar, Nav, Dropdown } from 'react-bootstrap'
 import { AuthContext } from '../../../context'
 import './css/styles.css'
@@ -7,7 +7,15 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faStore, faShoppingCart, faUserCircle, faBars } from '@fortawesome/free-solid-svg-icons'
 
 export default function NavBar(){
-    const { auth } = useContext(AuthContext)
+    const { logout } = useContext(AuthContext)
+    const history = useHistory()
+
+    const onLogout = () => {
+        logout((auth) => {
+            auth ? history.push('/') : history.push('/login')
+        })
+    }
+
     return(
         <>
             <Navbar bg="dark" variant="dark" expand="lg" className="position-sticky w-100 justify-content-between" style={{ boxShadow: "0px 2px 15px 2px black"}}>
@@ -28,7 +36,7 @@ export default function NavBar(){
                     {/* <NavLink to='/cart' className="mx-3 text-decoration-none text-warning navLinkHover">
                         <FontAwesomeIcon icon={faBars} style={{width:"20px", height:"20px"}} />
                     </NavLink> */}
-                    <NavLink to='/login' className="mx-1 text-decoration-none text-warning navLinkHover"><FontAwesomeIcon icon={faUserCircle} style={{width:"20px", height:"20px"}} /></NavLink>
+                    <NavLink onClick={onLogout} className="mx-1 text-decoration-none text-warning navLinkHover"><FontAwesomeIcon icon={faUserCircle} style={{width:"20px", height:"20px"}} /></NavLink>
                     {/* <Dropdown>
                         <Dropdown.Toggle className="d-inline" id="dropdown-basic">
                             {/* <FontAwesomeIcon icon={faBars} /> 

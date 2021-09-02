@@ -17,12 +17,25 @@ export const AuthContextProvider = (props) => {
             callBack(auth)
         }).catch(error => {
             console.log(error)
+            toast('Something went wrong!')
             callBack(false)
         })
     }
 
+    function logout(callBack){
+        axios.get('http://localhost:5000/api/auth/login').then(response => {
+            setAuth(response.data.data.authCheck)
+            toast(response.data.message)
+            callBack(auth)
+        }).catch(error => {
+            console.log(error)
+            toast('Something went wrong!')
+            callBack(true)
+        })
+    }
+
     return (
-        <AuthContext.Provider value={{ auth, user, login }}>
+        <AuthContext.Provider value={{ auth, user, login, logout }}>
             {props.children}
             <Toaster />
         </AuthContext.Provider>
