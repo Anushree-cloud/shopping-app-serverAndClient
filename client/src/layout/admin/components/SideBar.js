@@ -22,7 +22,7 @@ export default function SideBar() {
                     </div>
                     <div className='sidebar-item py-2 px-4'>
                         <div className="d-inline"><FontAwesomeIcon icon={faFile}/></div>
-                        <p className='text-dark sidebar-item-link d-inline'  >Orders</p>
+                        <p className='text-dark sidebar-item-link d-inline' onClick={() => goToPage('/admin/orders')} >Orders</p>
                     </div>
                     <div className='sidebar-item py-2 px-4'>
                         <div className="d-inline"><FontAwesomeIcon icon={faShoppingCart} /></div>

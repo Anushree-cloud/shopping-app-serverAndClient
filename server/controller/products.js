@@ -45,7 +45,6 @@ const createProduct = (req, res) => {
             })
         })
     })
-    
 }
 
 

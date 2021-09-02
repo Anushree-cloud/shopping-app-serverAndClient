@@ -14,6 +14,9 @@ import Dashboard from '../pages/admin/dashboard/Dashboard'
 import ProductListAdmin from '../pages/admin/product/ProductList'
 import AddProduct from '../pages/admin/product/AddProduct'
 import EditProduct from '../pages/admin/product/EditProduct'
+import Checkout from '../pages/customer/cart/Checkout'
+import Orders from '../pages/admin/orders/Orders'
+import Login from '../pages/customer/auth/Login'
 
 
 export default function Router() {
@@ -41,11 +44,26 @@ export default function Router() {
                         <Cart />
                     </Layout>
                 </Route>
+                <Route exact path='/checkout'>
+                    <Layout>
+                        <Checkout />
+                    </Layout>
+                </Route>
+                <Route exact path='/login'>
+                    <Layout>
+                        <Login />
+                    </Layout>
+                </Route>
 
                 {/* admin routes */}
                 <Route exact path='/admin'>
                     <AdminLayout>
                         <Dashboard />
+                    </AdminLayout>
+                </Route>
+                <Route exact path='/admin/orders'>
+                    <AdminLayout>
+                        <Orders />
                     </AdminLayout>
                 </Route>
                 <Route exact path='/admin/products'>

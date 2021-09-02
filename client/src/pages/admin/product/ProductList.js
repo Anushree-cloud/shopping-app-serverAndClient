@@ -27,7 +27,7 @@ export default function ProductListAdmin() {
 
     function deleteProduct(id) {
         axios.delete(`http://localhost:5000/api/products/${id}`).then((response) => {
-            console.log(response.data.message);
+            setProductList(response.data.data)
         }).catch((error) => console.log(error))
     }
 
@@ -43,7 +43,7 @@ export default function ProductListAdmin() {
                             <tr>
                                 <th>Id</th>
                                 <th>Name</th>
-                                <th className="w-50">Image</th>
+                                <th className="w-25">Image</th>
                                 <th>Price</th>
                                 <th>Actions</th>
                             </tr>

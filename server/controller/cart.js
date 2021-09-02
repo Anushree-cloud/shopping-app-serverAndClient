@@ -9,7 +9,7 @@ const getCartItems = (req, res) => {
             data: cartItems
         })
     })
-} 
+}
 
 //post data to cart
 const postItemToCart = (req, res) => {
@@ -21,10 +21,8 @@ const postItemToCart = (req, res) => {
         let currentProductInCartIndex = Cart.findByIndex(req.body.productId)
         Cart.findAll((cartItems) => {
             cartItems[currentProductInCartIndex] = {
-                product_name: currentProduct.product_name,
-                imgUrl: currentProduct.imgUrl,
-                price: currentProduct.price,
-                quantity: Number(currentProduct.quantity) + 1
+                ...cartItems[currentProductInCartIndex],
+                quantity: (currentProductInCart.quantity) + 1
             }
             Cart.save(cartItems, () => {
                 res.json({
@@ -47,28 +45,18 @@ const postItemToCart = (req, res) => {
     }
 }
 
-// //update cart
-// const updateCart = (req, res) => {
-//     let currentProduct = Cart.findById(req.body.productId)
-//     if(currentProduct){
-//         let currentProductIndex = Cart.findByIndex(req.body.productId)
-//         let updatedCartItem = {
-//             product_name: currentProduct.product_name,
-//             imgUrl: currentProduct.imgUrl,
-//             price: currentProduct.price,
-//             quantity: (currentProduct.quantity)++
-//         }
-//         Cart.findAll((cartItems) => {
-//             cartItems[currentProductIndex] = updatedCartItem
-//             Cart.save(products, () => {
-//                 res.json({
-//                     message: `product with id ${req.body.productId} is updated`,
-//                     data: updatedCartItem
-//                 })
-//             })
-//         })
-//     }
-    
-// }
+//delete from Cart
+const deleteFromCart = (req, res) => {
+    let currentProductIndex = Cart.findByIndex(req.params.id)
+    Cart.findAll((cartItems) => {
+        cartItems.splice(currentProductIndex, 1)
+        Cart.save(cartItems, () => {
+            res.json({
+                message: `Item successfully deleted with id ${req.params.id}`,
+                data: cartItems
+            })
+        })
+    })
+}
 
-module.exports = { getCartItems, postItemToCart }
+module.exports = { getCartItems, postItemToCart, deleteFromCart }
