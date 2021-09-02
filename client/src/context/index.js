@@ -11,10 +11,12 @@ export const AuthContextProvider = (props) => {
     function login(email, password) {
         axios.post('http://localhost:5000/api/auth/login', { email, password }).then(response => {
             console.log(response.data);
-            setUser(response.data.data)
+            setUser(response.data.data.users)
             setAuth(response.data.authCheck)
             toast(response.data.message)
-        })
+        }).catch(error => console.log(error))
+        console.log(auth)
+        return auth
     }
 
     return (
