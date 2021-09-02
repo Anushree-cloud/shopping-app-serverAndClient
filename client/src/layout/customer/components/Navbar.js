@@ -1,11 +1,13 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import { NavLink } from 'react-router-dom'
-import { Navbar, Nav } from 'react-bootstrap'
+import { Navbar, Nav, Dropdown } from 'react-bootstrap'
+import { AuthContext } from '../../../context'
 import './css/styles.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faStore, faShoppingCart, faUserCircle } from '@fortawesome/free-solid-svg-icons'
+import { faStore, faShoppingCart, faUserCircle, faBars } from '@fortawesome/free-solid-svg-icons'
 
 export default function NavBar(){
+    const { auth } = useContext(AuthContext)
     return(
         <>
             <Navbar bg="dark" variant="dark" expand="lg" className="position-sticky w-100 justify-content-between" style={{ boxShadow: "0px 2px 15px 2px black"}}>
@@ -22,8 +24,22 @@ export default function NavBar(){
 
                 </div>
                 <div className="me-5">
-                    <NavLink to='/cart' className="mx-3 text-decoration-none text-warning navLinkHover"><FontAwesomeIcon icon={faShoppingCart} style={{width:"20px", height:"20px"}} /></NavLink>
-                    <NavLink to='/login' className="mx-1 text-decoration-none text-warning navLinkHover"><FontAwesomeIcon icon={faUserCircle} style={{width:"20px", height:"20px"}} /></NavLink>                    
+                    <NavLink to='/cart' className="mx-3 d-inline text-decoration-none text-warning navLinkHover"><FontAwesomeIcon icon={faShoppingCart} style={{width:"20px", height:"20px"}} /></NavLink>
+                    {/* <NavLink to='/cart' className="mx-3 text-decoration-none text-warning navLinkHover">
+                        <FontAwesomeIcon icon={faBars} style={{width:"20px", height:"20px"}} />
+                    </NavLink> */}
+                    <NavLink to='/login' className="mx-1 text-decoration-none text-warning navLinkHover"><FontAwesomeIcon icon={faUserCircle} style={{width:"20px", height:"20px"}} /></NavLink>
+                    {/* <Dropdown>
+                        <Dropdown.Toggle className="d-inline" id="dropdown-basic">
+                            {/* <FontAwesomeIcon icon={faBars} /> 
+                        </Dropdown.Toggle>
+                        
+                        <Dropdown.Menu>
+                            <Dropdown.Item href="#/action-1">Action</Dropdown.Item>
+                            <Dropdown.Item href="#/action-2">Another action</Dropdown.Item>
+                            <Dropdown.Item href="#/action-3">Something else</Dropdown.Item>
+                        </Dropdown.Menu>
+                    </Dropdown> */}
                 </div>
                 
             </Navbar>

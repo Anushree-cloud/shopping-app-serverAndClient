@@ -6,12 +6,14 @@ import { AuthContext } from '../../../context'
 export default function Login() {
     const [email, setEmail] = useState('')
     const [password, setPassword] = useState('')
-    const { auth, login } = useContext(AuthContext)
+    const { login } = useContext(AuthContext)
     const history = useHistory()
 
     const onSubmitHandler = (event) => {
         event.preventDefault()
-        login(email, password) ? history.push('/') : history.push('/login')
+        login(email, password, (auth) => {
+            auth ? history.push('/') : history.push('/login')
+        })
         
     }
 

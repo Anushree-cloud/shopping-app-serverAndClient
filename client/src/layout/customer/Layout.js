@@ -1,11 +1,22 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { Redirect } from 'react-router-dom'
+import { AuthContext } from '../../context'
 import Navbar from './components/Navbar'
 
 export default function Layout(props) {
+    const { auth } = useContext(AuthContext)
+    console.log(auth) //false
     return (
         <>
-            <Navbar />
-            {props.children}
+            { auth ? (
+                <>
+                    <Navbar />
+                    {props.children}
+                </>
+            ) : (
+                <Redirect push to='/login' />
+            )}
+            
         </>
     )
 }
