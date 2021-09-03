@@ -14,7 +14,6 @@ export default function Login() {
         login(email, password, (auth) => {
             auth ? history.push('/') : history.push('/login')
         })
-        
     }
 
     return (

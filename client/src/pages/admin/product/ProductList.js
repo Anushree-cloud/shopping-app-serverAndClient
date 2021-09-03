@@ -37,7 +37,7 @@ export default function ProductListAdmin() {
                 <h1>Loading....</h1>
             ) : (
                 <div>
-                    <h1>Product List</h1>
+                    <h1 style={{borderBottom: "3px double black"}}>Product List</h1>
                     <Table striped bordered hover>
                         <thead>
                             <tr>

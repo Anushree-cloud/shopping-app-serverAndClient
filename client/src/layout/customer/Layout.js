@@ -5,7 +5,7 @@ import Navbar from './components/Navbar'
 
 export default function Layout(props) {
     const { auth } = useContext(AuthContext)
-    console.log(auth) //false
+    // console.log(auth)
     return (
         <>
             { auth ? (

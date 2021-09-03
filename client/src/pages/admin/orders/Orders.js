@@ -1,7 +1,8 @@
+import { faInfoCircle } from '@fortawesome/free-solid-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import axios from 'axios'
-import { Button } from 'bootstrap'
 import React, { useEffect, useState } from 'react'
-import { Table } from 'react-bootstrap'
+import { Table, Button } from 'react-bootstrap'
 import { useHistory } from 'react-router-dom'
 
 export default function Orders() {
@@ -24,7 +25,6 @@ export default function Orders() {
                 <h1>Loading....</h1>
             ) : (
                 <div>
-                    <h1>Product List</h1>
                     <Table striped bordered hover>
                         <thead>
                             <tr>
@@ -50,7 +50,7 @@ export default function Orders() {
                                                 onClick={() => history.push(`/admin/orders/${order.orderId}`)} 
                                                 size='sm' 
                                                 variant='warning'>
-                                                Click Here
+                                                <FontAwesomeIcon icon={faInfoCircle}/>
                                             </Button>
                                         </td>
                                     </tr> 

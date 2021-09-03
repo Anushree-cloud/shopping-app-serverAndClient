@@ -31,32 +31,34 @@ export default function AddProduct() {
     }
 
     return (
-        <div className="d-flex align-items-center flex-column">
-            <h1>Add Product</h1>
-            <Form className="form-control m-3 " style={{textAlign: 'left', width: '80%'}} onSubmit={submitHandler} >
+        <>
+            <div className="d-flex align-items-center flex-column">
+                <h1 className="mx-2 w-100" style={{borderBottom: "3px double black"}}>Add Product</h1>
+                <Form className="form-control m-3 " style={{textAlign: 'left', width: '80%'}} onSubmit={submitHandler} >
 
-                <Form.Group className="mb-3" controlId="formBasicEmail">
-                    <Form.Label>Product Name</Form.Label>
-                    <Form.Control type="text" placeholder="Enter Product's Name" onChange={(event) => setProductName(event.target.value)} />
-                </Form.Group>
+                    <Form.Group className="mb-3" controlId="formBasicEmail">
+                        <Form.Label>Product Name</Form.Label>
+                        <Form.Control type="text" placeholder="Enter Product's Name" onChange={(event) => setProductName(event.target.value)} />
+                    </Form.Group>
 
-                <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <Form.Label>Image URL</Form.Label>
-                    <Form.Control type="text" placeholder="Enter Product's Image URL" onChange={(event) => setImage(event.target.value)} />
-                </Form.Group>
+                    <Form.Group className="mb-3" controlId="formBasicPassword">
+                        <Form.Label>Image URL</Form.Label>
+                        <Form.Control type="text" placeholder="Enter Product's Image URL" onChange={(event) => setImage(event.target.value)} />
+                    </Form.Group>
 
-                <Form.Group className="mb-3" controlId="formBasicPassword">
-                    <Form.Label>Price</Form.Label>
-                    <Form.Control type="text" placeholder="Enter Product's Price" onChange={(event) => setPrice(event.target.value)} />
-                </Form.Group>
+                    <Form.Group className="mb-3" controlId="formBasicPassword">
+                        <Form.Label>Price</Form.Label>
+                        <Form.Control type="text" placeholder="Enter Product's Price" onChange={(event) => setPrice(event.target.value)} />
+                    </Form.Group>
 
-                <Button variant="primary" type="submit">
-                    Submit Details
-                </Button>
-            </Form>
+                    <Button variant="primary" type="submit">
+                        Submit Details
+                    </Button>
+                </Form>
 
-            <ToastContainer />
+                <ToastContainer />
 
-        </div>
+            </div>
+        </>
     )
 }

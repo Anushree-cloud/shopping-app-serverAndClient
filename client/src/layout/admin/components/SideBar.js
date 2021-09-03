@@ -15,23 +15,23 @@ export default function SideBar() {
                 <div className='sidebar-header text-light bg-dark px-4 py-1 w-100'>
                     <h3>Admin</h3>
                 </div>
-                <div className='sidebar-itemList w-100'>
+                <div className='sidebar-itemList w-100 px-2'>
 
-                    <div className='border-bottom mb-2 py-2'>
+                    <div className='border-bottom border-secondary mb-2 py-2'>
                         <div className='sidebar-item py-2 px-4'>
-                            <div className="d-inline"><FontAwesomeIcon icon={faTachometerAlt} color="#0d6efd"/></div>
-                            <p className='text-primary sidebar-item-link d-inline' onClick={() => goToPage('/admin')} >Dashboard</p>
+                            <div className="d-inline"><FontAwesomeIcon icon={faTachometerAlt}/></div>
+                            <p className='sidebar-item-link d-inline' onClick={() => goToPage('/admin')} >Dashboard</p>
                         </div>
                     </div>
                     
-                    <div className='border-bottom mb-2 pb-2'>
+                    <div className='border-bottom border-secondary mb-2 pb-2'>
                         <div className='sidebar-item py-2 px-4'>
                             <div className="d-inline"><FontAwesomeIcon icon={faFile}/></div>
                             <p className='text-dark sidebar-item-link d-inline' onClick={() => goToPage('/admin/orders')} >Orders</p>
                         </div>
                     </div>
                     
-                    <div className='border-bottom mb-2 pb-2'>
+                    <div className='border-bottom border-secondary mb-2 pb-2'>
                         <div className='sidebar-item py-2 px-4'>
                             <div className="d-inline"><FontAwesomeIcon icon={faShoppingCart} /></div>
                             <p className='text-dark sidebar-item-link d-inline' onClick={() => goToPage('/admin/products')} >Products</p>

@@ -10,10 +10,11 @@ export const AuthContextProvider = (props) => {
 
     function login(email, password, callBack) {
         axios.post('http://localhost:5000/api/auth/login', { email, password }).then(response => {
-            console.log(response.data);
-            setUser(response.data.data.users)
-            setAuth(response.data.data.authCheck)
+            console.log(response.data)
+            const { authCheck, users } = response.data.data
+            setUser(users)
             toast(response.data.message)
+            setAuth(authCheck)
             callBack(auth)
         }).catch(error => {
             console.log(error)
@@ -23,10 +24,10 @@ export const AuthContextProvider = (props) => {
     }
 
     function logout(callBack){
-        axios.get('http://localhost:5000/api/auth/login').then(response => {
+        axios.get('http://localhost:5000/api/auth/logout').then(response => {
             setAuth(response.data.data.authCheck)
             toast(response.data.message)
-            callBack(auth)
+            callBack(response.data.data.authCheck)
         }).catch(error => {
             console.log(error)
             toast('Something went wrong!')
@@ -35,7 +36,7 @@ export const AuthContextProvider = (props) => {
     }
 
     return (
-        <AuthContext.Provider value={{ auth, user, login, logout }}>
+        <AuthContext.Provider value={{ auth, login, logout }}>
             {props.children}
             <Toaster />
         </AuthContext.Provider>
