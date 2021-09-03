@@ -15,7 +15,7 @@ export const AuthContextProvider = (props) => {
             setUser(users)
             toast(response.data.message)
             setAuth(authCheck)
-            callBack(auth)
+            callBack(authCheck)
         }).catch(error => {
             console.log(error)
             toast('Something went wrong!')
