@@ -11,6 +11,13 @@ function findAll(callBack) {
     })
 }
 
+function findById(id) {
+    let currentOrder = orders.find((order) => {
+        return order.orderId === id
+    })
+    return currentOrder
+}
+
 function save(data, callBack) {
     fs.writeFile('./database/orders.json', JSON.stringify(data), (error) => {
         if(error)
@@ -19,5 +26,5 @@ function save(data, callBack) {
     })
 } 
 
-module.exports = { save, findAll }
+module.exports = { save, findAll, findById }
 

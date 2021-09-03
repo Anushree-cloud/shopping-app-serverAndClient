@@ -1,9 +1,1 @@
-[
-    {
-        "name": "Anushree",
-        "address": "abcd",
-        "phone": "6555675",
-        "email": "abc@gmail.com",
-        "password": "1234"
-    }
-]
+[{"id":"1","name":"Anushree","address":"abcd","phone":"6555675","email":"abc@gmail.com","password":"1234"},{"id":"ec5e87bc-fb22-4da9-afe2-8d7996b5af0c","name":"Thor","address":"Asgard","phone":"00112233","email":"thor@asgard.com","password":"12345"}]

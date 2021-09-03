@@ -9,6 +9,7 @@ export default function Checkout() {
     const [name, setName] = useState('')
     const [address, setAddress] = useState('')
     const [phone, setPhone] = useState('')
+    const [email, setEmail] = useState('')
     const history = useHistory()
 
     const submitUserDetails = (event) => {
@@ -16,7 +17,8 @@ export default function Checkout() {
         let newUser = {
             name: name,
             address: address,
-            phone: phone
+            phone: phone,
+            email: email
         }
         axios.post('http://localhost:5000/api/orders', newUser).then(response => {
             console.log(response.data.data)
@@ -43,6 +45,11 @@ export default function Checkout() {
             <Form.Group className="mb-3" controlId="formBasicPassword">
                 <Form.Label>Phone Number</Form.Label>
                 <Form.Control type="text" placeholder="Enter Phone Number" onChange={(event) => setPhone(event.target.value)} />
+            </Form.Group>
+
+            <Form.Group className="mb-3" controlId="formBasicPassword">
+                <Form.Label>Email</Form.Label>
+                <Form.Control type="text" placeholder="Enter Email" onChange={(event) => setEmail(event.target.value)} />
             </Form.Group>
 
             <Button variant="primary" type="submit">Submit Details</Button>

@@ -1,7 +1,7 @@
 import React from 'react'
 import './styles.css'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faTachometerAlt, faFile, faShoppingCart, faUsers, faFolderPlus } from '@fortawesome/free-solid-svg-icons'
+import { faTachometerAlt, faFile, faShoppingCart, faUsers, faFolderPlus, faUserPlus } from '@fortawesome/free-solid-svg-icons'
 import { useHistory } from 'react-router-dom'
 
 export default function SideBar() {
@@ -16,25 +16,39 @@ export default function SideBar() {
                     <h3>Admin</h3>
                 </div>
                 <div className='sidebar-itemList w-100'>
-                    <div className='sidebar-item py-2 px-4'>
-                        <div className="d-inline"><FontAwesomeIcon icon={faTachometerAlt} color="#0d6efd"/></div>
-                        <p className='text-primary sidebar-item-link d-inline' onClick={() => goToPage('/admin')} >Dashboard</p>
+
+                    <div className='border-bottom mb-2 py-2'>
+                        <div className='sidebar-item py-2 px-4'>
+                            <div className="d-inline"><FontAwesomeIcon icon={faTachometerAlt} color="#0d6efd"/></div>
+                            <p className='text-primary sidebar-item-link d-inline' onClick={() => goToPage('/admin')} >Dashboard</p>
+                        </div>
                     </div>
-                    <div className='sidebar-item py-2 px-4'>
-                        <div className="d-inline"><FontAwesomeIcon icon={faFile}/></div>
-                        <p className='text-dark sidebar-item-link d-inline' onClick={() => goToPage('/admin/orders')} >Orders</p>
+                    
+                    <div className='border-bottom mb-2 pb-2'>
+                        <div className='sidebar-item py-2 px-4'>
+                            <div className="d-inline"><FontAwesomeIcon icon={faFile}/></div>
+                            <p className='text-dark sidebar-item-link d-inline' onClick={() => goToPage('/admin/orders')} >Orders</p>
+                        </div>
                     </div>
-                    <div className='sidebar-item py-2 px-4'>
-                        <div className="d-inline"><FontAwesomeIcon icon={faShoppingCart} /></div>
-                        <p className='text-dark sidebar-item-link d-inline' onClick={() => goToPage('/admin/products')} >Products</p>
+                    
+                    <div className='border-bottom mb-2 pb-2'>
+                        <div className='sidebar-item py-2 px-4'>
+                            <div className="d-inline"><FontAwesomeIcon icon={faShoppingCart} /></div>
+                            <p className='text-dark sidebar-item-link d-inline' onClick={() => goToPage('/admin/products')} >Products</p>
+                        </div>
+                        <div className='sidebar-item py-2 px-4'>
+                            <div className="d-inline"><FontAwesomeIcon icon={faFolderPlus} /></div>
+                            <p className='text-dark sidebar-item-link d-inline' onClick={() => goToPage('/admin/products/add')}  >Add Product</p>
+                        </div>
                     </div>
-                    <div className='sidebar-item py-2 px-4'>
-                        <div className="d-inline"><FontAwesomeIcon icon={faFolderPlus} /></div>
-                        <p className='text-dark sidebar-item-link d-inline' onClick={() => goToPage('/admin/products/add')}  >Add Product</p>
-                    </div>
+                    
                     <div className='sidebar-item py-2 px-4'>
                         <div className="d-inline"><FontAwesomeIcon icon={faUsers} /></div>
-                        <p className='text-dark sidebar-item-link d-inline'>Customers</p>
+                        <p className='text-dark sidebar-item-link d-inline' onClick={() => goToPage('/admin/users')}>Users</p>
+                    </div>
+                    <div className='sidebar-item py-2 px-4'>
+                        <div className="d-inline"><FontAwesomeIcon icon={faUserPlus} /></div>
+                        <p className='text-dark sidebar-item-link d-inline' onClick={() => goToPage('/admin/users/add')}>Add User</p>
                     </div>
                 </div>
             </div>

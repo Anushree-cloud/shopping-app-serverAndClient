@@ -18,6 +18,10 @@ import EditProduct from '../pages/admin/product/EditProduct'
 import Checkout from '../pages/customer/cart/Checkout'
 import Orders from '../pages/admin/orders/Orders'
 import Login from '../pages/customer/auth/Login'
+import UserListing from '../pages/admin/users/UserListing'
+import AddUser from '../pages/admin/users/AddUser'
+import OrderDetails from '../pages/admin/orders/OrderDetails'
+
 
 
 export default function Router() {
@@ -67,6 +71,11 @@ export default function Router() {
                         <Orders />
                     </AdminLayout>
                 </Route>
+                <Route exact path='/admin/orders/:id'>
+                    <AdminLayout>
+                        <OrderDetails />
+                    </AdminLayout>
+                </Route>
                 <Route exact path='/admin/products'>
                     <AdminLayout>
                         <ProductListAdmin />
@@ -82,6 +91,17 @@ export default function Router() {
                         <EditProduct />
                     </AdminLayout>
                 </Route>
+                <Route exact path='/admin/users'>
+                    <AdminLayout>
+                        <UserListing />
+                    </AdminLayout>
+                </Route>
+                <Route exact path='/admin/users/add'>
+                    <AdminLayout>
+                        <AddUser />
+                    </AdminLayout>
+                </Route>
+
             </BrowserRouter>
                 
         </>

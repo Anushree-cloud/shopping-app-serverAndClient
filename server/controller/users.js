@@ -27,10 +27,10 @@ const getParticularUser = (req, res) => {
 
 //create a new user profile
 const createUser = (req, res) => {
-    const { userName, address, phone, email, password } = req.body
+    const { name, address, phone, email, password } = req.body
     const newUser = {
         id: uuid.v4(),
-        userName,
+        name,
         address,
         phone,
         email,
