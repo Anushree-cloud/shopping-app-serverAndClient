@@ -27,7 +27,7 @@ export default function NavBar(){
                         </Navbar.Brand>
                         <Nav className="w-100 d-flex justify-content-between flex-row">
                             <NavLink to='/' className="m-2 text-decoration-none text-warning navLinkHover">Home</NavLink>
-                            <NavLink to='/products'className="m-2 text-decoration-none text-warning navLinkHover">Product</NavLink>
+                            <NavLink to='/products' className="m-2 text-decoration-none text-warning navLinkHover">Product</NavLink>
                         </Nav>
 
                 </div>

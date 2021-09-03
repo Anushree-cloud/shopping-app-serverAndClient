@@ -12,7 +12,9 @@ export default function Login() {
     const onSubmitHandler = (event) => {
         event.preventDefault()
         login(email, password, (auth) => {
-            auth ? history.push('/') : history.push('/login')
+            if(auth){
+                history.push('/')
+            }
         })
     }
 
